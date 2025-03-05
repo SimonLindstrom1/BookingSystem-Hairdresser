@@ -1,5 +1,6 @@
 ﻿namespace BookingSystem_Hairdresser.Controllers;
 using BookingSystem_Hairdresser.Data;
+using BookingSystem_Hairdresser.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,9 +22,9 @@ public class AppointmentsController : ControllerBase
             .Where(a => a.HairdresserId == hairdresserId)
             .Include(a => a.Customer)
             .OrderBy(a => a.DateTime)
-            .Select(a => new
+            .Select(a => new AppointmentDTO
             {
-                a.DateTime,
+                DateTime = a.DateTime,
                 CustomerName = a.Customer.Name,
                 CustomerPhone = a.Customer.Phone
             })
