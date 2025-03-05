@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookingSystem_Hairdresser.Database.Tables
+namespace BookingSystem_Hairdresser.Tables
 {
     public class Customer
     {

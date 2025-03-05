@@ -1,7 +1,7 @@
-﻿using BookingSystem_Hairdresser.Database.Tables;
+﻿using BookingSystem_Hairdresser.Tables;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookingSystem_Hairdresser.Database
+namespace BookingSystem_Hairdresser.Data
 {
     public class BookingDbContext : DbContext
     {
