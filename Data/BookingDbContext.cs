@@ -9,6 +9,7 @@ namespace BookingSystem_Hairdresser.Data
         public DbSet<Hairdresser> Hairdressers { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");

@@ -13,15 +13,11 @@ namespace BookingSystem_Hairdresser.Tables
 
         [Required]
         public int CustomerId { get; set; }
-
-        [ForeignKey("CustomerId")]
-        public Customer? Customer { get; set; }
+        public Customer Customer { get; set; } = null!; 
 
         [Required]
         public int HairdresserId { get; set; }
-
-        [ForeignKey("HairdresserId")]
-        public Hairdresser? Hairdresser { get; set; }
+        public Hairdresser Hairdresser { get; set; } = null!;
     }
 }
 

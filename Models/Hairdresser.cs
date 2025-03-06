@@ -9,6 +9,9 @@ namespace BookingSystem_Hairdresser.Tables
 
         [Required]
         public string Name { get; set; } = string.Empty;
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; } = string.Empty;
         public List<Appointment> Appointments { get; set; } = new();
     }
 }

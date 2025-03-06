@@ -1,6 +1,8 @@
 ﻿namespace BookingSystem_Hairdresser.Controllers;
 using BookingSystem_Hairdresser.Data;
 using BookingSystem_Hairdresser.DTOs;
+using BookingSystem_Hairdresser.DTOs.BookingSystem_Hairdresser.DTOs;
+using BookingSystem_Hairdresser.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,12 +10,16 @@ using Microsoft.EntityFrameworkCore;
 [Route("api/[controller]")]
 public class AppointmentsController : ControllerBase
 {
-    private readonly BookingDbContext _context;
 
-    public AppointmentsController(BookingDbContext context)
+    private readonly BookingDbContext _context;
+    private readonly AppointmentService appointmentService;
+
+    public AppointmentsController(BookingDbContext context, AppointmentService _appointmentService)
     {
         _context = context;
+        appointmentService = _appointmentService;
     }
+
 
     [HttpGet("hairdresser/{hairdresserId}")]
     public IActionResult GetAppointmentsForHairdresser(int hairdresserId)
@@ -46,6 +52,15 @@ public class AppointmentsController : ControllerBase
         _context.SaveChanges();
 
         return Ok($"Bokningen {appointmentId} har avbokats.");
+    }
+    [HttpPost]
+    public IActionResult CreateBooking([FromBody] BookingRequestDTO bookingRequest)
+    {
+        if (appointmentService.AddBooking(bookingRequest))
+        {
+            return Ok("Bokningen har lagts till.");
+        }
+        return BadRequest("Fel: Frisören kunde inte hittas.");
     }
 }
 
