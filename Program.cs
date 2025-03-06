@@ -9,16 +9,18 @@ namespace BookingSystem_Hairdresser
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Lägg till databaskontext
             builder.Services.AddDbContext<BookingDbContext>(options =>
-                options.UseSqlServer("Server=localhost;Database=BookingDB;Trusted_Connection=True;"));
+                options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=BookingDB;Trusted_Connection=True;"));
 
+            // Lägg till övriga tjänster
             builder.Services.AddControllers();
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
+            // Middleware
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -27,9 +29,7 @@ namespace BookingSystem_Hairdresser
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }

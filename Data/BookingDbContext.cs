@@ -5,19 +5,15 @@ namespace BookingSystem_Hairdresser.Data
 {
     public class BookingDbContext : DbContext
     {
+        public BookingDbContext(DbContextOptions<BookingDbContext> options)
+            : base(options) { }
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Hairdresser> Hairdressers { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Customer)
                 .WithMany(c => c.Appointments)
@@ -30,3 +26,4 @@ namespace BookingSystem_Hairdresser.Data
         }
     }
 }
+
